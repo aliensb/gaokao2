@@ -1,0 +1,886 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ku6.tv.gaokao.mapper.XuexiaoMapper">
+  <resultMap id="BaseResultMap" type="ku6.tv.gaokao.model.Xuexiao">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="zhaoshengdaima" jdbcType="NVARCHAR" property="zhaoshengdaima" />
+    <result column="xuexiaomingcheng" jdbcType="NVARCHAR" property="xuexiaomingcheng" />
+    <result column="diqu" jdbcType="NVARCHAR" property="diqu" />
+    <result column="chengshi" jdbcType="NVARCHAR" property="chengshi" />
+    <result column="banxuexingzhi" jdbcType="NVARCHAR" property="banxuexingzhi" />
+    <result column="lisu" jdbcType="NVARCHAR" property="lisu" />
+    <result column="jibie" jdbcType="NVARCHAR" property="jibie" />
+    <result column="leixing" jdbcType="NVARCHAR" property="leixing" />
+    <result column="paiming" jdbcType="NVARCHAR" property="paiming" />
+    <result column="wenli" jdbcType="NVARCHAR" property="wenli" />
+    <result column="pici" jdbcType="NVARCHAR" property="pici" />
+    <result column="zhaoshenrenshu2016" jdbcType="INTEGER" property="zhaoshenrenshu2016" />
+    <result column="zhaoshenrenshu2015" jdbcType="INTEGER" property="zhaoshenrenshu2015" />
+    <result column="zhaoshenrenshu2014" jdbcType="INTEGER" property="zhaoshenrenshu2014" />
+    <result column="zhaoshenrenshu2013" jdbcType="INTEGER" property="zhaoshenrenshu2013" />
+    <result column="zhaoshenrenshu2012" jdbcType="INTEGER" property="zhaoshenrenshu2012" />
+    <result column="zhaoshenrenshu2011" jdbcType="INTEGER" property="zhaoshenrenshu2011" />
+    <result column="fenshu2010" jdbcType="DECIMAL" property="fenshu2010" />
+    <result column="fenshu2011" jdbcType="DECIMAL" property="fenshu2011" />
+    <result column="fenshu2012" jdbcType="DECIMAL" property="fenshu2012" />
+    <result column="fenshu2013" jdbcType="DECIMAL" property="fenshu2013" />
+    <result column="fenshu2014" jdbcType="DECIMAL" property="fenshu2014" />
+    <result column="fenshu2015" jdbcType="DECIMAL" property="fenshu2015" />
+    <result column="fenshu2016" jdbcType="DECIMAL" property="fenshu2016" />
+    <result column="weici2011" jdbcType="INTEGER" property="weici2011" />
+    <result column="weici2012" jdbcType="INTEGER" property="weici2012" />
+    <result column="weici2013" jdbcType="INTEGER" property="weici2013" />
+    <result column="weici2014" jdbcType="INTEGER" property="weici2014" />
+    <result column="weici2015" jdbcType="INTEGER" property="weici2015" />
+    <result column="weici2016" jdbcType="INTEGER" property="weici2016" />
+    <result column="zhaoshengrenshu2017" jdbcType="INTEGER" property="zhaoshengrenshu2017" />
+    <result column="weici2017" jdbcType="INTEGER" property="weici2017" />
+    <result column="fenshu2017" jdbcType="DECIMAL" property="fenshu2017" />
+    <result column="zhaoshenguize" jdbcType="VARCHAR" property="zhaoshenguize" />
+    <result column="yucefenshu2018" jdbcType="DECIMAL" property="yucefenshu2018" />
+    <result column="yuceweici2018" jdbcType="INTEGER" property="yuceweici2018" />
+    <result column="zhaoshengrenshu2018" jdbcType="INTEGER" property="zhaoshengrenshu2018" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, zhaoshengdaima, xuexiaomingcheng, diqu, chengshi, banxuexingzhi, lisu, jibie,
+    leixing, paiming, wenli, pici, zhaoshenrenshu2016, zhaoshenrenshu2015, zhaoshenrenshu2014,
+    zhaoshenrenshu2013, zhaoshenrenshu2012, zhaoshenrenshu2011, fenshu2010, fenshu2011,
+    fenshu2012, fenshu2013, fenshu2014, fenshu2015, fenshu2016, weici2011, weici2012,
+    weici2013, weici2014, weici2015, weici2016, zhaoshengrenshu2017, weici2017, fenshu2017,
+    zhaoshenguize, yucefenshu2018, yuceweici2018, zhaoshengrenshu2018
+  </sql>
+  <select id="selectByExample" parameterType="ku6.tv.gaokao.model.XuexiaoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gaokao2..xuexiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from gaokao2..xuexiao
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from gaokao2..xuexiao
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="ku6.tv.gaokao.model.XuexiaoExample">
+    delete from gaokao2..xuexiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="ku6.tv.gaokao.model.Xuexiao">
+    insert into gaokao2..xuexiao (id, zhaoshengdaima, xuexiaomingcheng,
+    diqu, chengshi, banxuexingzhi,
+    lisu, jibie, leixing,
+    paiming, wenli, pici,
+    zhaoshenrenshu2016, zhaoshenrenshu2015,
+    zhaoshenrenshu2014, zhaoshenrenshu2013,
+    zhaoshenrenshu2012, zhaoshenrenshu2011,
+    fenshu2010, fenshu2011, fenshu2012,
+    fenshu2013, fenshu2014, fenshu2015,
+    fenshu2016, weici2011, weici2012,
+    weici2013, weici2014, weici2015,
+    weici2016, zhaoshengrenshu2017, weici2017,
+    fenshu2017, zhaoshenguize, yucefenshu2018,
+    yuceweici2018, zhaoshengrenshu2018)
+    values (#{id,jdbcType=INTEGER}, #{zhaoshengdaima,jdbcType=NVARCHAR}, #{xuexiaomingcheng,jdbcType=NVARCHAR},
+    #{diqu,jdbcType=NVARCHAR}, #{chengshi,jdbcType=NVARCHAR}, #{banxuexingzhi,jdbcType=NVARCHAR},
+    #{lisu,jdbcType=NVARCHAR}, #{jibie,jdbcType=NVARCHAR}, #{leixing,jdbcType=NVARCHAR},
+    #{paiming,jdbcType=NVARCHAR}, #{wenli,jdbcType=NVARCHAR}, #{pici,jdbcType=NVARCHAR},
+    #{zhaoshenrenshu2016,jdbcType=INTEGER}, #{zhaoshenrenshu2015,jdbcType=INTEGER},
+    #{zhaoshenrenshu2014,jdbcType=INTEGER}, #{zhaoshenrenshu2013,jdbcType=INTEGER},
+    #{zhaoshenrenshu2012,jdbcType=INTEGER}, #{zhaoshenrenshu2011,jdbcType=INTEGER},
+    #{fenshu2010,jdbcType=DECIMAL}, #{fenshu2011,jdbcType=DECIMAL}, #{fenshu2012,jdbcType=DECIMAL},
+    #{fenshu2013,jdbcType=DECIMAL}, #{fenshu2014,jdbcType=DECIMAL}, #{fenshu2015,jdbcType=DECIMAL},
+    #{fenshu2016,jdbcType=DECIMAL}, #{weici2011,jdbcType=INTEGER}, #{weici2012,jdbcType=INTEGER},
+    #{weici2013,jdbcType=INTEGER}, #{weici2014,jdbcType=INTEGER}, #{weici2015,jdbcType=INTEGER},
+    #{weici2016,jdbcType=INTEGER}, #{zhaoshengrenshu2017,jdbcType=INTEGER}, #{weici2017,jdbcType=INTEGER},
+    #{fenshu2017,jdbcType=DECIMAL}, #{zhaoshenguize,jdbcType=VARCHAR}, #{yucefenshu2018,jdbcType=DECIMAL},
+    #{yuceweici2018,jdbcType=INTEGER}, #{zhaoshengrenshu2018,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="ku6.tv.gaokao.model.Xuexiao">
+    insert into gaokao2..xuexiao
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="zhaoshengdaima != null">
+        zhaoshengdaima,
+      </if>
+      <if test="xuexiaomingcheng != null">
+        xuexiaomingcheng,
+      </if>
+      <if test="diqu != null">
+        diqu,
+      </if>
+      <if test="chengshi != null">
+        chengshi,
+      </if>
+      <if test="banxuexingzhi != null">
+        banxuexingzhi,
+      </if>
+      <if test="lisu != null">
+        lisu,
+      </if>
+      <if test="jibie != null">
+        jibie,
+      </if>
+      <if test="leixing != null">
+        leixing,
+      </if>
+      <if test="paiming != null">
+        paiming,
+      </if>
+      <if test="wenli != null">
+        wenli,
+      </if>
+      <if test="pici != null">
+        pici,
+      </if>
+      <if test="zhaoshenrenshu2016 != null">
+        zhaoshenrenshu2016,
+      </if>
+      <if test="zhaoshenrenshu2015 != null">
+        zhaoshenrenshu2015,
+      </if>
+      <if test="zhaoshenrenshu2014 != null">
+        zhaoshenrenshu2014,
+      </if>
+      <if test="zhaoshenrenshu2013 != null">
+        zhaoshenrenshu2013,
+      </if>
+      <if test="zhaoshenrenshu2012 != null">
+        zhaoshenrenshu2012,
+      </if>
+      <if test="zhaoshenrenshu2011 != null">
+        zhaoshenrenshu2011,
+      </if>
+      <if test="fenshu2010 != null">
+        fenshu2010,
+      </if>
+      <if test="fenshu2011 != null">
+        fenshu2011,
+      </if>
+      <if test="fenshu2012 != null">
+        fenshu2012,
+      </if>
+      <if test="fenshu2013 != null">
+        fenshu2013,
+      </if>
+      <if test="fenshu2014 != null">
+        fenshu2014,
+      </if>
+      <if test="fenshu2015 != null">
+        fenshu2015,
+      </if>
+      <if test="fenshu2016 != null">
+        fenshu2016,
+      </if>
+      <if test="weici2011 != null">
+        weici2011,
+      </if>
+      <if test="weici2012 != null">
+        weici2012,
+      </if>
+      <if test="weici2013 != null">
+        weici2013,
+      </if>
+      <if test="weici2014 != null">
+        weici2014,
+      </if>
+      <if test="weici2015 != null">
+        weici2015,
+      </if>
+      <if test="weici2016 != null">
+        weici2016,
+      </if>
+      <if test="zhaoshengrenshu2017 != null">
+        zhaoshengrenshu2017,
+      </if>
+      <if test="weici2017 != null">
+        weici2017,
+      </if>
+      <if test="fenshu2017 != null">
+        fenshu2017,
+      </if>
+      <if test="zhaoshenguize != null">
+        zhaoshenguize,
+      </if>
+      <if test="yucefenshu2018 != null">
+        yucefenshu2018,
+      </if>
+      <if test="yuceweici2018 != null">
+        yuceweici2018,
+      </if>
+      <if test="zhaoshengrenshu2018 != null">
+        zhaoshengrenshu2018,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshengdaima != null">
+        #{zhaoshengdaima,jdbcType=NVARCHAR},
+      </if>
+      <if test="xuexiaomingcheng != null">
+        #{xuexiaomingcheng,jdbcType=NVARCHAR},
+      </if>
+      <if test="diqu != null">
+        #{diqu,jdbcType=NVARCHAR},
+      </if>
+      <if test="chengshi != null">
+        #{chengshi,jdbcType=NVARCHAR},
+      </if>
+      <if test="banxuexingzhi != null">
+        #{banxuexingzhi,jdbcType=NVARCHAR},
+      </if>
+      <if test="lisu != null">
+        #{lisu,jdbcType=NVARCHAR},
+      </if>
+      <if test="jibie != null">
+        #{jibie,jdbcType=NVARCHAR},
+      </if>
+      <if test="leixing != null">
+        #{leixing,jdbcType=NVARCHAR},
+      </if>
+      <if test="paiming != null">
+        #{paiming,jdbcType=NVARCHAR},
+      </if>
+      <if test="wenli != null">
+        #{wenli,jdbcType=NVARCHAR},
+      </if>
+      <if test="pici != null">
+        #{pici,jdbcType=NVARCHAR},
+      </if>
+      <if test="zhaoshenrenshu2016 != null">
+        #{zhaoshenrenshu2016,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2015 != null">
+        #{zhaoshenrenshu2015,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2014 != null">
+        #{zhaoshenrenshu2014,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2013 != null">
+        #{zhaoshenrenshu2013,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2012 != null">
+        #{zhaoshenrenshu2012,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2011 != null">
+        #{zhaoshenrenshu2011,jdbcType=INTEGER},
+      </if>
+      <if test="fenshu2010 != null">
+        #{fenshu2010,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2011 != null">
+        #{fenshu2011,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2012 != null">
+        #{fenshu2012,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2013 != null">
+        #{fenshu2013,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2014 != null">
+        #{fenshu2014,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2015 != null">
+        #{fenshu2015,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2016 != null">
+        #{fenshu2016,jdbcType=DECIMAL},
+      </if>
+      <if test="weici2011 != null">
+        #{weici2011,jdbcType=INTEGER},
+      </if>
+      <if test="weici2012 != null">
+        #{weici2012,jdbcType=INTEGER},
+      </if>
+      <if test="weici2013 != null">
+        #{weici2013,jdbcType=INTEGER},
+      </if>
+      <if test="weici2014 != null">
+        #{weici2014,jdbcType=INTEGER},
+      </if>
+      <if test="weici2015 != null">
+        #{weici2015,jdbcType=INTEGER},
+      </if>
+      <if test="weici2016 != null">
+        #{weici2016,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshengrenshu2017 != null">
+        #{zhaoshengrenshu2017,jdbcType=INTEGER},
+      </if>
+      <if test="weici2017 != null">
+        #{weici2017,jdbcType=INTEGER},
+      </if>
+      <if test="fenshu2017 != null">
+        #{fenshu2017,jdbcType=DECIMAL},
+      </if>
+      <if test="zhaoshenguize != null">
+        #{zhaoshenguize,jdbcType=VARCHAR},
+      </if>
+      <if test="yucefenshu2018 != null">
+        #{yucefenshu2018,jdbcType=DECIMAL},
+      </if>
+      <if test="yuceweici2018 != null">
+        #{yuceweici2018,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshengrenshu2018 != null">
+        #{zhaoshengrenshu2018,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="ku6.tv.gaokao.model.XuexiaoExample" resultType="java.lang.Long">
+    select count(*) from gaokao2..xuexiao
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update gaokao2..xuexiao
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshengdaima != null">
+        zhaoshengdaima = #{record.zhaoshengdaima,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.xuexiaomingcheng != null">
+        xuexiaomingcheng = #{record.xuexiaomingcheng,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.diqu != null">
+        diqu = #{record.diqu,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.chengshi != null">
+        chengshi = #{record.chengshi,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.banxuexingzhi != null">
+        banxuexingzhi = #{record.banxuexingzhi,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.lisu != null">
+        lisu = #{record.lisu,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.jibie != null">
+        jibie = #{record.jibie,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.leixing != null">
+        leixing = #{record.leixing,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.paiming != null">
+        paiming = #{record.paiming,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.wenli != null">
+        wenli = #{record.wenli,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.pici != null">
+        pici = #{record.pici,jdbcType=NVARCHAR},
+      </if>
+      <if test="record.zhaoshenrenshu2016 != null">
+        zhaoshenrenshu2016 = #{record.zhaoshenrenshu2016,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshenrenshu2015 != null">
+        zhaoshenrenshu2015 = #{record.zhaoshenrenshu2015,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshenrenshu2014 != null">
+        zhaoshenrenshu2014 = #{record.zhaoshenrenshu2014,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshenrenshu2013 != null">
+        zhaoshenrenshu2013 = #{record.zhaoshenrenshu2013,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshenrenshu2012 != null">
+        zhaoshenrenshu2012 = #{record.zhaoshenrenshu2012,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshenrenshu2011 != null">
+        zhaoshenrenshu2011 = #{record.zhaoshenrenshu2011,jdbcType=INTEGER},
+      </if>
+      <if test="record.fenshu2010 != null">
+        fenshu2010 = #{record.fenshu2010,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fenshu2011 != null">
+        fenshu2011 = #{record.fenshu2011,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fenshu2012 != null">
+        fenshu2012 = #{record.fenshu2012,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fenshu2013 != null">
+        fenshu2013 = #{record.fenshu2013,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fenshu2014 != null">
+        fenshu2014 = #{record.fenshu2014,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fenshu2015 != null">
+        fenshu2015 = #{record.fenshu2015,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fenshu2016 != null">
+        fenshu2016 = #{record.fenshu2016,jdbcType=DECIMAL},
+      </if>
+      <if test="record.weici2011 != null">
+        weici2011 = #{record.weici2011,jdbcType=INTEGER},
+      </if>
+      <if test="record.weici2012 != null">
+        weici2012 = #{record.weici2012,jdbcType=INTEGER},
+      </if>
+      <if test="record.weici2013 != null">
+        weici2013 = #{record.weici2013,jdbcType=INTEGER},
+      </if>
+      <if test="record.weici2014 != null">
+        weici2014 = #{record.weici2014,jdbcType=INTEGER},
+      </if>
+      <if test="record.weici2015 != null">
+        weici2015 = #{record.weici2015,jdbcType=INTEGER},
+      </if>
+      <if test="record.weici2016 != null">
+        weici2016 = #{record.weici2016,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshengrenshu2017 != null">
+        zhaoshengrenshu2017 = #{record.zhaoshengrenshu2017,jdbcType=INTEGER},
+      </if>
+      <if test="record.weici2017 != null">
+        weici2017 = #{record.weici2017,jdbcType=INTEGER},
+      </if>
+      <if test="record.fenshu2017 != null">
+        fenshu2017 = #{record.fenshu2017,jdbcType=DECIMAL},
+      </if>
+      <if test="record.zhaoshenguize != null">
+        zhaoshenguize = #{record.zhaoshenguize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yucefenshu2018 != null">
+        yucefenshu2018 = #{record.yucefenshu2018,jdbcType=DECIMAL},
+      </if>
+      <if test="record.yuceweici2018 != null">
+        yuceweici2018 = #{record.yuceweici2018,jdbcType=INTEGER},
+      </if>
+      <if test="record.zhaoshengrenshu2018 != null">
+        zhaoshengrenshu2018 = #{record.zhaoshengrenshu2018,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update gaokao2..xuexiao
+    set id = #{record.id,jdbcType=INTEGER},
+    zhaoshengdaima = #{record.zhaoshengdaima,jdbcType=NVARCHAR},
+    xuexiaomingcheng = #{record.xuexiaomingcheng,jdbcType=NVARCHAR},
+    diqu = #{record.diqu,jdbcType=NVARCHAR},
+    chengshi = #{record.chengshi,jdbcType=NVARCHAR},
+    banxuexingzhi = #{record.banxuexingzhi,jdbcType=NVARCHAR},
+    lisu = #{record.lisu,jdbcType=NVARCHAR},
+    jibie = #{record.jibie,jdbcType=NVARCHAR},
+    leixing = #{record.leixing,jdbcType=NVARCHAR},
+    paiming = #{record.paiming,jdbcType=NVARCHAR},
+    wenli = #{record.wenli,jdbcType=NVARCHAR},
+    pici = #{record.pici,jdbcType=NVARCHAR},
+    zhaoshenrenshu2016 = #{record.zhaoshenrenshu2016,jdbcType=INTEGER},
+    zhaoshenrenshu2015 = #{record.zhaoshenrenshu2015,jdbcType=INTEGER},
+    zhaoshenrenshu2014 = #{record.zhaoshenrenshu2014,jdbcType=INTEGER},
+    zhaoshenrenshu2013 = #{record.zhaoshenrenshu2013,jdbcType=INTEGER},
+    zhaoshenrenshu2012 = #{record.zhaoshenrenshu2012,jdbcType=INTEGER},
+    zhaoshenrenshu2011 = #{record.zhaoshenrenshu2011,jdbcType=INTEGER},
+    fenshu2010 = #{record.fenshu2010,jdbcType=DECIMAL},
+    fenshu2011 = #{record.fenshu2011,jdbcType=DECIMAL},
+    fenshu2012 = #{record.fenshu2012,jdbcType=DECIMAL},
+    fenshu2013 = #{record.fenshu2013,jdbcType=DECIMAL},
+    fenshu2014 = #{record.fenshu2014,jdbcType=DECIMAL},
+    fenshu2015 = #{record.fenshu2015,jdbcType=DECIMAL},
+    fenshu2016 = #{record.fenshu2016,jdbcType=DECIMAL},
+    weici2011 = #{record.weici2011,jdbcType=INTEGER},
+    weici2012 = #{record.weici2012,jdbcType=INTEGER},
+    weici2013 = #{record.weici2013,jdbcType=INTEGER},
+    weici2014 = #{record.weici2014,jdbcType=INTEGER},
+    weici2015 = #{record.weici2015,jdbcType=INTEGER},
+    weici2016 = #{record.weici2016,jdbcType=INTEGER},
+    zhaoshengrenshu2017 = #{record.zhaoshengrenshu2017,jdbcType=INTEGER},
+    weici2017 = #{record.weici2017,jdbcType=INTEGER},
+    fenshu2017 = #{record.fenshu2017,jdbcType=DECIMAL},
+    zhaoshenguize = #{record.zhaoshenguize,jdbcType=VARCHAR},
+    yucefenshu2018 = #{record.yucefenshu2018,jdbcType=DECIMAL},
+    yuceweici2018 = #{record.yuceweici2018,jdbcType=INTEGER},
+    zhaoshengrenshu2018 = #{record.zhaoshengrenshu2018,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="ku6.tv.gaokao.model.Xuexiao">
+    update gaokao2..xuexiao
+    <set>
+      <if test="zhaoshengdaima != null">
+        zhaoshengdaima = #{zhaoshengdaima,jdbcType=NVARCHAR},
+      </if>
+      <if test="xuexiaomingcheng != null">
+        xuexiaomingcheng = #{xuexiaomingcheng,jdbcType=NVARCHAR},
+      </if>
+      <if test="diqu != null">
+        diqu = #{diqu,jdbcType=NVARCHAR},
+      </if>
+      <if test="chengshi != null">
+        chengshi = #{chengshi,jdbcType=NVARCHAR},
+      </if>
+      <if test="banxuexingzhi != null">
+        banxuexingzhi = #{banxuexingzhi,jdbcType=NVARCHAR},
+      </if>
+      <if test="lisu != null">
+        lisu = #{lisu,jdbcType=NVARCHAR},
+      </if>
+      <if test="jibie != null">
+        jibie = #{jibie,jdbcType=NVARCHAR},
+      </if>
+      <if test="leixing != null">
+        leixing = #{leixing,jdbcType=NVARCHAR},
+      </if>
+      <if test="paiming != null">
+        paiming = #{paiming,jdbcType=NVARCHAR},
+      </if>
+      <if test="wenli != null">
+        wenli = #{wenli,jdbcType=NVARCHAR},
+      </if>
+      <if test="pici != null">
+        pici = #{pici,jdbcType=NVARCHAR},
+      </if>
+      <if test="zhaoshenrenshu2016 != null">
+        zhaoshenrenshu2016 = #{zhaoshenrenshu2016,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2015 != null">
+        zhaoshenrenshu2015 = #{zhaoshenrenshu2015,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2014 != null">
+        zhaoshenrenshu2014 = #{zhaoshenrenshu2014,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2013 != null">
+        zhaoshenrenshu2013 = #{zhaoshenrenshu2013,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2012 != null">
+        zhaoshenrenshu2012 = #{zhaoshenrenshu2012,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshenrenshu2011 != null">
+        zhaoshenrenshu2011 = #{zhaoshenrenshu2011,jdbcType=INTEGER},
+      </if>
+      <if test="fenshu2010 != null">
+        fenshu2010 = #{fenshu2010,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2011 != null">
+        fenshu2011 = #{fenshu2011,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2012 != null">
+        fenshu2012 = #{fenshu2012,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2013 != null">
+        fenshu2013 = #{fenshu2013,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2014 != null">
+        fenshu2014 = #{fenshu2014,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2015 != null">
+        fenshu2015 = #{fenshu2015,jdbcType=DECIMAL},
+      </if>
+      <if test="fenshu2016 != null">
+        fenshu2016 = #{fenshu2016,jdbcType=DECIMAL},
+      </if>
+      <if test="weici2011 != null">
+        weici2011 = #{weici2011,jdbcType=INTEGER},
+      </if>
+      <if test="weici2012 != null">
+        weici2012 = #{weici2012,jdbcType=INTEGER},
+      </if>
+      <if test="weici2013 != null">
+        weici2013 = #{weici2013,jdbcType=INTEGER},
+      </if>
+      <if test="weici2014 != null">
+        weici2014 = #{weici2014,jdbcType=INTEGER},
+      </if>
+      <if test="weici2015 != null">
+        weici2015 = #{weici2015,jdbcType=INTEGER},
+      </if>
+      <if test="weici2016 != null">
+        weici2016 = #{weici2016,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshengrenshu2017 != null">
+        zhaoshengrenshu2017 = #{zhaoshengrenshu2017,jdbcType=INTEGER},
+      </if>
+      <if test="weici2017 != null">
+        weici2017 = #{weici2017,jdbcType=INTEGER},
+      </if>
+      <if test="fenshu2017 != null">
+        fenshu2017 = #{fenshu2017,jdbcType=DECIMAL},
+      </if>
+      <if test="zhaoshenguize != null">
+        zhaoshenguize = #{zhaoshenguize,jdbcType=VARCHAR},
+      </if>
+      <if test="yucefenshu2018 != null">
+        yucefenshu2018 = #{yucefenshu2018,jdbcType=DECIMAL},
+      </if>
+      <if test="yuceweici2018 != null">
+        yuceweici2018 = #{yuceweici2018,jdbcType=INTEGER},
+      </if>
+      <if test="zhaoshengrenshu2018 != null">
+        zhaoshengrenshu2018 = #{zhaoshengrenshu2018,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="ku6.tv.gaokao.model.Xuexiao">
+    update gaokao2..xuexiao
+    set zhaoshengdaima = #{zhaoshengdaima,jdbcType=NVARCHAR},
+    xuexiaomingcheng = #{xuexiaomingcheng,jdbcType=NVARCHAR},
+    diqu = #{diqu,jdbcType=NVARCHAR},
+    chengshi = #{chengshi,jdbcType=NVARCHAR},
+    banxuexingzhi = #{banxuexingzhi,jdbcType=NVARCHAR},
+    lisu = #{lisu,jdbcType=NVARCHAR},
+    jibie = #{jibie,jdbcType=NVARCHAR},
+    leixing = #{leixing,jdbcType=NVARCHAR},
+    paiming = #{paiming,jdbcType=NVARCHAR},
+    wenli = #{wenli,jdbcType=NVARCHAR},
+    pici = #{pici,jdbcType=NVARCHAR},
+    zhaoshenrenshu2016 = #{zhaoshenrenshu2016,jdbcType=INTEGER},
+    zhaoshenrenshu2015 = #{zhaoshenrenshu2015,jdbcType=INTEGER},
+    zhaoshenrenshu2014 = #{zhaoshenrenshu2014,jdbcType=INTEGER},
+    zhaoshenrenshu2013 = #{zhaoshenrenshu2013,jdbcType=INTEGER},
+    zhaoshenrenshu2012 = #{zhaoshenrenshu2012,jdbcType=INTEGER},
+    zhaoshenrenshu2011 = #{zhaoshenrenshu2011,jdbcType=INTEGER},
+    fenshu2010 = #{fenshu2010,jdbcType=DECIMAL},
+    fenshu2011 = #{fenshu2011,jdbcType=DECIMAL},
+    fenshu2012 = #{fenshu2012,jdbcType=DECIMAL},
+    fenshu2013 = #{fenshu2013,jdbcType=DECIMAL},
+    fenshu2014 = #{fenshu2014,jdbcType=DECIMAL},
+    fenshu2015 = #{fenshu2015,jdbcType=DECIMAL},
+    fenshu2016 = #{fenshu2016,jdbcType=DECIMAL},
+    weici2011 = #{weici2011,jdbcType=INTEGER},
+    weici2012 = #{weici2012,jdbcType=INTEGER},
+    weici2013 = #{weici2013,jdbcType=INTEGER},
+    weici2014 = #{weici2014,jdbcType=INTEGER},
+    weici2015 = #{weici2015,jdbcType=INTEGER},
+    weici2016 = #{weici2016,jdbcType=INTEGER},
+    zhaoshengrenshu2017 = #{zhaoshengrenshu2017,jdbcType=INTEGER},
+    weici2017 = #{weici2017,jdbcType=INTEGER},
+    fenshu2017 = #{fenshu2017,jdbcType=DECIMAL},
+    zhaoshenguize = #{zhaoshenguize,jdbcType=VARCHAR},
+    yucefenshu2018 = #{yucefenshu2018,jdbcType=DECIMAL},
+    yuceweici2018 = #{yuceweici2018,jdbcType=INTEGER},
+    zhaoshengrenshu2018 = #{zhaoshengrenshu2018,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getProvinceNames" resultType="java.lang.String">
+    SELECT DISTINCT diqu from xuexiao
+  </select>
+
+  <select id="getCityNamesByProvinceName" parameterType="String" resultType="String">
+    SELECT DISTINCT chengshi from xuexiao where diqu= #{proName,jdbcType=NVARCHAR}
+  </select>
+
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT * from xuexiao
+  </select>
+
+  <select id="search" parameterType="GradeSearchVo"  resultMap="BaseResultMap">
+    SELECT * from xuexiao WHERE 1=1
+    <choose>
+      <when test="grade!=null and grade!='' and bodongzhi!=null and bodongzhi!='' ">
+        AND yucefenshu2018 BETWEEN #{grade}-#{bodongzhi} AND #{grade}+#{bodongzhi}
+      </when>
+      <when test="weici!=null and weici!='' and bodongzhi!=null and bodongzhi!='' ">
+        and yuceweici2018 BETWEEN #{weici}-#{bodongzhi} AND #{weici}+#{bodongzhi}
+      </when>
+    </choose>
+    <if test="province!=null and province!=''">
+      AND diqu =#{province}
+    </if>
+    <if test="city!=null and city!=''">
+      AND chengshi =#{city}
+    </if>
+    <if test="pici!=null and pici!=''">
+      AND pici =#{pici}
+    </if>
+    <if test="wenli!=null and wenli!=''">
+      AND wenli =#{wenli}
+    </if>
+    <if test="banxue!=null and banxue!=''">
+      AND banxuexingzhi =#{banxue}
+    </if>
+    <choose>
+      <when test="sort==0">
+        order by yucefenshu2018 DESC
+      </when>
+      <when test="sort==1">
+        order by yucefenshu2018 ASC
+      </when>
+    </choose>
+  </select>
+  
+  <select id="findByNameLike"  resultMap="BaseResultMap" parameterType="String">
+    SELECT * from xuexiao WHERE  xuexiaomingcheng like '%'+#{schoolName}+'%'
+  </select>
+  
+  <select id="findSchoolInIds" resultMap="BaseResultMap">
+    select * from xuexiao where id in 
+    <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+      #{id}
+    </foreach>
+  </select>
+
+
+  <resultMap id="XuexiaoZhuanye" type="ku6.tv.gaokao.model.XueXiaoAndZhuanye">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="zhaoshengdaima" jdbcType="NVARCHAR" property="zhaoshengdaima" />
+    <result column="xuexiaomingcheng" jdbcType="NVARCHAR" property="xuexiaomingcheng" />
+    <result column="diqu" jdbcType="NVARCHAR" property="diqu" />
+    <result column="chengshi" jdbcType="NVARCHAR" property="chengshi" />
+    <result column="banxuexingzhi" jdbcType="NVARCHAR" property="banxuexingzhi" />
+    <result column="lisu" jdbcType="NVARCHAR" property="lisu" />
+    <result column="jibie" jdbcType="NVARCHAR" property="jibie" />
+    <result column="leixing" jdbcType="NVARCHAR" property="leixing" />
+    <result column="paiming" jdbcType="NVARCHAR" property="paiming" />
+    <result column="wenli" jdbcType="NVARCHAR" property="wenli" />
+    <result column="pici" jdbcType="NVARCHAR" property="pici" />
+    <result column="zhaoshenrenshu2016" jdbcType="INTEGER" property="zhaoshenrenshu2016" />
+    <result column="zhaoshenrenshu2015" jdbcType="INTEGER" property="zhaoshenrenshu2015" />
+    <result column="zhaoshenrenshu2014" jdbcType="INTEGER" property="zhaoshenrenshu2014" />
+    <result column="zhaoshenrenshu2013" jdbcType="INTEGER" property="zhaoshenrenshu2013" />
+    <result column="zhaoshenrenshu2012" jdbcType="INTEGER" property="zhaoshenrenshu2012" />
+    <result column="zhaoshenrenshu2011" jdbcType="INTEGER" property="zhaoshenrenshu2011" />
+    <result column="fenshu2010" jdbcType="DECIMAL" property="fenshu2010" />
+    <result column="fenshu2011" jdbcType="DECIMAL" property="fenshu2011" />
+    <result column="fenshu2012" jdbcType="DECIMAL" property="fenshu2012" />
+    <result column="fenshu2013" jdbcType="DECIMAL" property="fenshu2013" />
+    <result column="fenshu2014" jdbcType="DECIMAL" property="fenshu2014" />
+    <result column="fenshu2015" jdbcType="DECIMAL" property="fenshu2015" />
+    <result column="fenshu2016" jdbcType="DECIMAL" property="fenshu2016" />
+    <result column="weici2011" jdbcType="INTEGER" property="weici2011" />
+    <result column="weici2012" jdbcType="INTEGER" property="weici2012" />
+    <result column="weici2013" jdbcType="INTEGER" property="weici2013" />
+    <result column="weici2014" jdbcType="INTEGER" property="weici2014" />
+    <result column="weici2015" jdbcType="INTEGER" property="weici2015" />
+    <result column="weici2016" jdbcType="INTEGER" property="weici2016" />
+    <result column="zhaoshengrenshu2017" jdbcType="INTEGER" property="zhaoshengrenshu2017" />
+    <result column="weici2017" jdbcType="INTEGER" property="weici2017" />
+    <result column="fenshu2017" jdbcType="DECIMAL" property="fenshu2017" />
+    <result column="zhaoshenguize" jdbcType="VARCHAR" property="zhaoshenguize" />
+    <result column="yucefenshu2018" jdbcType="DECIMAL" property="yucefenshu2018" />
+    <result column="yuceweici2018" jdbcType="INTEGER" property="yuceweici2018" />
+    <result column="zhaoshengrenshu2018" jdbcType="INTEGER" property="zhaoshengrenshu2018" />
+    <collection property="zhuanye" column="id" ofType="ku6.tv.gaokao.model.Zhuanye">
+      <id column="zhuanyeid" jdbcType="INTEGER" property="id" />
+        <result column="xuexiaomingcheng" jdbcType="NVARCHAR" property="xuexiaomingcheng" />
+        <result column="zhuanyemingcheng" jdbcType="NVARCHAR" property="zhuanyemingcheng" />
+        <result column="diqu" jdbcType="NVARCHAR" property="diqu" />
+        <result column="wenli" jdbcType="NVARCHAR" property="wenli" />
+        <result column="pici" jdbcType="NVARCHAR" property="pici" />
+        <result column="shuobodian" jdbcType="NVARCHAR" property="shuobodian" />
+        <result column="xuekezhongdian" jdbcType="NVARCHAR" property="xuekezhongdian" />
+        <result column="fenshu2010" jdbcType="DECIMAL" property="fenshu2010" />
+        <result column="fenshu2011" jdbcType="DECIMAL" property="fenshu2011" />
+        <result column="fenshu2012" jdbcType="DECIMAL" property="fenshu2012" />
+        <result column="fenshu2013" jdbcType="DECIMAL" property="fenshu2013" />
+        <result column="fenshu2014" jdbcType="DECIMAL" property="fenshu2014" />
+        <result column="fenshu2015" jdbcType="DECIMAL" property="fenshu2015" />
+        <result column="fenshu2016" jdbcType="DECIMAL" property="fenshu2016" />
+        <result column="fenshu2017" jdbcType="DECIMAL" property="fenshu2017" />
+        <result column="weici2011" jdbcType="INTEGER" property="weici2011" />
+        <result column="weici2012" jdbcType="INTEGER" property="weici2012" />
+        <result column="weici2013" jdbcType="INTEGER" property="weici2013" />
+        <result column="weici2014" jdbcType="INTEGER" property="weici2014" />
+        <result column="weici2015" jdbcType="INTEGER" property="weici2015" />
+        <result column="weici2016" jdbcType="INTEGER" property="weici2016" />
+        <result column="weici2017" jdbcType="INTEGER" property="weici2017" />
+        <result column="zhaoshenreshu2011" jdbcType="INTEGER" property="zhaoshenreshu2011" />
+        <result column="zhaoshenreshu2012" jdbcType="INTEGER" property="zhaoshenreshu2012" />
+        <result column="zhaoshenreshu2013" jdbcType="INTEGER" property="zhaoshenreshu2013" />
+        <result column="zhaoshenreshu2014" jdbcType="INTEGER" property="zhaoshenreshu2014" />
+        <result column="zhaoshenreshu2015" jdbcType="INTEGER" property="zhaoshenreshu2015" />
+        <result column="zhaoshenreshu2016" jdbcType="INTEGER" property="zhaoshenreshu2016" />
+        <result column="zhaoshenreshu2017" jdbcType="INTEGER" property="zhaoshenreshu2017" />
+        <result column="xuexiaoid" jdbcType="INTEGER" property="xuexiaoid" />
+        <result column="yucefenshu2018" jdbcType="INTEGER" property="yucefenshu2018" />
+        <result column="yuceweici2018" jdbcType="INTEGER" property="yuceweici2018" />
+        <result column="zhaoshenreshu2018" jdbcType="INTEGER" property="zhaoshenreshu2018" />
+    </collection>
+  </resultMap>
+
+<select id="selectXueXiaoAndZhuanInXuexiaoId" resultMap="XuexiaoZhuanye">
+  select   x.id, x.zhaoshengdaima, x.xuexiaomingcheng, x.diqu, x.chengshi, x.banxuexingzhi, x.lisu, x.jibie,
+  x.leixing, x.paiming, x.wenli, x.pici, x.zhaoshenrenshu2016, x.zhaoshenrenshu2015, x.zhaoshenrenshu2014,
+  x.zhaoshenrenshu2013, x.zhaoshenrenshu2012, x.zhaoshenrenshu2011, x.fenshu2010, x.fenshu2011,
+  x.fenshu2012, x.fenshu2013, x.fenshu2014, x.fenshu2015, x.fenshu2016, x.weici2011, x.weici2012,
+  x.weici2013, x.weici2014, x.weici2015, x.weici2016, x.zhaoshengrenshu2017, x.weici2017, x.fenshu2017,
+  x.zhaoshenguize, x.yucefenshu2018, x.yuceweici2018, x.zhaoshengrenshu2018,z.zhuanyemingcheng,z.id as zhuanyeid from xuexiao x,zhuanye z where x.id=z.xuexiaoid and x.id in
+  <foreach collection="list" item="id" index="index" open="(" separator="," close=")" >
+    #{id}
+  </foreach>
+</select>
+
+</mapper>

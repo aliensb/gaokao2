@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <style>
+        #fixed_table #fix_head {
+            background: #FFFFFF;
+            box-shadow: 0px 0px 5px #888888;
+        }
+    </style>
+</head>
+<body>
+<div th:fragment="head">
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">首页</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <form class="navbar-form navbar-left" action="/xxfind" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="请输入学校名称" name="xuexiao">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                    <form class="navbar-form navbar-left" action="/zyfind" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="请输入专业名称" name="zhuanye">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                    <div class="navbar-form navbar-left">
+
+
+                    </div>
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已选学校&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" id="schools">
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">开始填报</a>
+                        </li>
+                        <li><a href="#" th:text="${session.teacher?.teacher}">教室名字</a></li>
+                        <li><a href="#" th:text="${session.currentStudent?.stuName}">学生名字</a></li>
+                        <li><a href="#" th:text="${session.currentStudent?.fenshu}">学生分数</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container-fluid" align="center">
+        <div class="row">
+            <form class="form-inline" action="/search" method="post">
+                <div class="form-group">
+                    <label for="chengji1">成绩</label>
+                    <input type="text" class="form-control" id="chengji1" placeholder="请输入成绩" name="grade"
+                           th:value="${session.currentStudent?.fenshu}" readonly="readonly">
+                </div>
+                <div class="form-group">
+                    <label for="bodongzhi1">波动值</label>
+                    <input type="text" class="form-control" id="bodongzhi1" placeholder="请输入波动值" name="bodongzhi">
+                </div>
+                <div class="form-group">
+                    <label for="shengfen1">省份</label>
+                    <select id="shengfen1" class="form-control" name="province"></select>
+                    <label for="chengshi1">城市</label>
+                    <select id="chengshi1" class="form-control" name="city">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pici1">批次</label>
+                    <select name="pici" class="form-control" id="pici1">
+                        <option value="本科一批">本科一批</option>
+                        <option value="本科二批">本科二批</option>
+                        <option value="专科一批">专科一批</option>
+                        <option value="专科二批">专科二批</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="wenli" id="wenke1" value="文科" checked> 文科
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="wenli" id="like1" value="理科"> 理科
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="banxue1">办学性质</label>
+                    <select id="banxue1" name="banxue" class="form-control">
+                        <option value="">不限</option>
+                        <option value='公办'>公办</option>
+                        <option value='民办'>民办</option>
+                        <option value='独立学院'>独立学院</option>
+                        <option value='中外合作办学'>中外合作办学</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sort1">排序方式</label>
+                    <select name="sort" class="form-control" id="sort1">
+                        <option value="0">预测分降序</option>
+                        <option value="1">预测分升序</option>
+                        <option value="2">默认排序</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="submit1">筛选</label>
+                    <input type="submit" class="form-control" id="submit1">
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <form class="form-inline" action="/search" method="post">
+                <div class="form-group">
+                    <label for="weici">位次</label>
+                    <input type="text" class="form-control" id="weici" placeholder="请输入位次" name="weici">
+                </div>
+                <div class="form-group">
+                    <label for="bodongzhi">波动值</label>
+                    <input type="text" class="form-control" id="bodongzhi" placeholder="请输入波动值" name="bodongzhi">
+                </div>
+                <div class="form-group">
+                    <label for="shengfen">省份</label>
+                    <select id="shengfen" class="form-control" name="province"></select>
+                    <label for="chengshi">城市</label>
+                    <select id="chengshi" class="form-control" name="city">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pici">批次</label>
+                    <select name="pici" class="form-control" id="pici">
+                        <option value="本科一批">本科一批</option>
+                        <option value="本科二批">本科二批</option>
+                        <option value="专科一批">专科一批</option>
+                        <option value="专科二批">专科二批</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="wenli" id="wenke" value="文科" checked> 文科
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="wenli" id="like" value="理科"> 理科
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="banxue">办学性质</label>
+                    <select id="banxue" name="banxue" class="form-control">
+                        <option value="">不限</option>
+                        <option value='公办'>公办</option>
+                        <option value='民办'>民办</option>
+                        <option value='独立学院'>独立学院</option>
+                        <option value='中外合作办学'>中外合作办学</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sort">排序方式</label>
+                    <select name="sort" class="form-control" id="sort">
+                        <option value="0">预测分降序</option>
+                        <option value="1">预测分升序</option>
+                        <option value="2">默认排序</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="submit">筛选</label>
+                    <input type="submit" class="form-control" id="submit">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        $.ajaxSetup({
+            async: false
+        });
+        $(function () {
+            getPro();
+            getCity($("#shengfen").val(), "chengshi")
+            getCity($("#shengfen").val(), "chengshi1")
+            bindProAndCityweici();
+            bindProAndCityfenshu();
+        });
+
+        function getPro() {
+            $.get("/res/getProNames", function (data, status) {
+                if (status == 'success') {
+                    var proEle = data.map(function (value) {
+                        return '<option value="' + value + '">' + value + '</option>';
+                    });
+                    proEle.splice(0, 0, '<option value="">不限</option>')
+                    $("#shengfen").append(proEle)
+                    $("#shengfen1").append(proEle)
+                }
+            });
+        }
+
+        function getCity(proName, id) {
+            $.post("/res/getCityByPro",
+                {
+                    proName: proName,
+                },
+                function (data, status) {
+                    if (status == 'success') {
+                        var cityEle = data.map(function (value) {
+                            return '<option value="' + value + '">' + value + '</option>';
+                        })
+                        cityEle.splice(0, 0, '<option value="">不限</option>')
+                        $("#" + id).append(cityEle)
+                    }
+                });
+        }
+
+        function bindProAndCityweici() {
+            $("#shengfen").change(function () {
+                var selectedProvince = $("#shengfen").val();
+                var sel = $("#chengshi")
+                sel.empty();
+                getCity(selectedProvince, 'chengshi')
+                // var cityEles=citys.map(function (value) {
+                //     return '<option value="' + value + '">' + value + '</option>';
+                // })
+                // sel.append(cityEles)
+            });
+        }
+
+        function bindProAndCityfenshu() {
+            $("#shengfen1").change(function () {
+                var selectedProvince = $("#shengfen1").val();
+                var sel = $("#chengshi1")
+                sel.empty();
+                getCity(selectedProvince, 'chengshi1')
+                // var cityEles=citys.map(function (value) {
+                //     return '<option value="' + value + '">' + value + '</option>';
+                // })
+                // sel.append(cityEles)
+            });
+        }
+    </script>
+</div>
+</body>
+
+
+</html>

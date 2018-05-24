@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+    <style type="text/css">
+        #main {
+            margin-top: 100px;
+        }
+
+        #btn {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <div class="row">
+        <div class="container">
+            <h1 align="center" th:text="${stInfo.stuName}+'欢迎使用本系统，请将费用缴清，缴清后请点击继续！'">欢迎使用本系统，请将费用缴清，缴清后请点击继续！</h1>
+            <h3 align="center" th:text="'当前编号为:'+${stid}" id="stid" th:value="${stid}">当前编号为:12120</h3>
+        </div>
+        <div class="container" id="btn">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary btn-lg btn-block" id="goon">继续</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $.ajaxSetup({
+        async: false
+    });
+    $(function () {
+        var stid = $("#stid").attr("value")
+        $("#goon").click(function () {
+
+            $.post("/checkFee",
+                {
+                    stid: stid,
+                },
+                function (data, status) {
+                    if (status == 'success') {
+                        if (data == 1) {
+                            window.location.href = 'http://' + window.location.host + '/';
+                        } else {
+                            alert('请等待缴费确认')
+                        }
+                    }
+                });
+        })
+
+    })
+</script>
+</body>
+</html>

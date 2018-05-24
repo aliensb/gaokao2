@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=gaokao2
+    username: sa
+    password: sa
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+mybatis:
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mybatis/mapper/*.xml
+  type-aliases-package: ku6.tv.gaokao.model
+pagehelper:
+  helperDialect: sqlserver
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+logging:
+  level:
+    org.springframework: WARN
+    org.apache.ibatis: INFO

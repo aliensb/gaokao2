@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrap-pager.js}" src="../static/js/bootstrap-pager.js"></script>
+    <script th:src="@{/js/compare.js}" src="../static/js/compare.js"></script>
+    <script th:src="@{/js/jquery.cookie.js}" src="../static/js/jquery.cookie.js"></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+    <link th:href="@{/css/bootstrap-pager.css}" rel="stylesheet" type="text/css" href="../static/css/bootstrap-pager.css">
+    <link th:href="@{/css/Index.css}" rel="stylesheet" type="text/css" href="../static/css/Index.css"/>
+</head>
+<body>
+<div th:insert="layout/head :: head"></div>
+<div>
+    <table class="table table-striped table-bordered table-hover " id="top_fix_table">
+        <thead>
+        <tr id="table_head">
+            <th>招生代码</th>
+            <th>学校名称</th>
+            <th>地区</th>
+            <th>城市</th>
+            <th>办学性质</th>
+            <th>级别</th>
+            <th>类型</th>
+            <th>文理</th>
+            <th>批次</th>
+            <th>招生人数2018</th>
+            <th>招生人数2017</th>
+            <th>招生人数2016</th>
+            <th>招生人数2015</th>
+            <th>招生人数2014</th>
+            <th>招生人数2013</th>
+            <th>位次2017</th>
+            <th>位次2016</th>
+            <th>位次2015</th>
+            <th>位次2014</th>
+            <th>位次2013</th>
+            <th>2017分数</th>
+            <th>2016分数</th>
+            <th>2015分数</th>
+            <th>2014分数</th>
+            <th>2013分数</th>
+            <th>招生规则</th>
+            <th>加入备选</th>
+            <th style="color: red;">预测分数2018</th>
+            <th style="color: red;">测位次2018</th>
+        </thead>
+        </thead>
+        <tbody>
+        <!--/*@thymesVar id="xuexiao" type="ku6.tv.gaokao.model.Xuexiao"*/-->
+        <tr th:each="xuexiao : ${page.list}">
+
+            <td th:text="*{xuexiao.zhaoshengdaima}">01111</td>
+            <td><a href="" th:href="@{/details/{id}(id=${xuexiao.id})}" th:text="${xuexiao.xuexiaomingcheng}"></a></td>
+            <td th:text="${xuexiao.diqu}">北京</td>
+            <td th:text="${xuexiao.chengshi}">北京</td>
+            <td th:text="${xuexiao.banxuexingzhi}">公办</td>
+            <td th:text="${xuexiao.jibie}">公办</td>
+            <td th:text="${xuexiao.leixing}">公办</td>
+            <td th:text="${xuexiao.wenli}">公办</td>
+            <td th:text="${xuexiao.pici}">公办</td>
+            <td th:text="${xuexiao.zhaoshengrenshu2018}">公办</td>
+            <td th:text="${xuexiao.zhaoshengrenshu2017}">公办</td>
+            <td th:text="${xuexiao.zhaoshenrenshu2016}">公办</td>
+            <td th:text="${xuexiao.zhaoshenrenshu2015}">公办</td>
+            <td th:text="${xuexiao.zhaoshenrenshu2014}">公办</td>
+            <td th:text="${xuexiao.zhaoshenrenshu2013}">公办</td>
+            <td th:text="${xuexiao.weici2017}" style="color: blue;">公办</td>
+            <td th:text="${xuexiao.weici2016}">公办</td>
+            <td th:text="${xuexiao.weici2015}">公办</td>
+            <td th:text="${xuexiao.weici2014}">公办</td>
+            <td th:text="${xuexiao.weici2013}">公办</td>
+            <td th:text="${xuexiao.fenshu2017}">公办</td>
+            <td th:text="${xuexiao.fenshu2016}">公办</td>
+            <td th:text="${xuexiao.fenshu2015}">公办</td>
+            <td th:text="${xuexiao.fenshu2014}">公办</td>
+            <td th:text="${xuexiao.fenshu2013}">公办</td>
+            <td><a th:href="'http://'+${xuexiao.zhaoshenguize}" th:text="招生规则"></a></td>
+            <td><input th:value="${xuexiao.id}" th:data="${xuexiao.xuexiaomingcheng}" class="duibi"type="checkbox" th:id="${xuexiao.id}"></td>
+            <td th:text="${xuexiao.yucefenshu2018}" style="color: red;font-weight:bold;">公办</td>
+            <td th:text="${xuexiao.yuceweici2018}" style="color: red;font-weight:bold;">公办</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <div class="row">
+            <div id="page-container-static-normal"></div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#page-container-static-normal").page({
+        count:[[${page.pages}]],
+        pageSize:[[${page.size}]],
+        pageNum:[[${page.pageNum}]],
+        theme:"big"
+    });
+    $("#page-container-static-normal").on("pageChanged",function (event,params) {
+        window.location.href='http://'+window.location.host+'/xxfind/'+params.pageNum
+        $(this).data("page").refresh(params);
+    })
+</script>
+
+</body>
+</html>

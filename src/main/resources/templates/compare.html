@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .comTable{
+            font-family: "微软雅黑";
+            font-weight: bold;
+            margin-top: 15px;
+            margin-left: 30px;
+        }.comTable table{
+             margin: 0px;
+             margin-right: -80px;
+         }
+        .comTable table td{
+            visibility: hidden;
+            width: 0px;
+        }
+        .comTable table:nth-child(1) td{
+            visibility: visible;
+            text-align: center;
+            background-color: #3F87AB;
+            color: #ffffff;
+        }
+        .comTable table:nth-child(6) td{
+            visibility: visible;
+            text-align: center;
+            background-color: #3F87AB;
+            color: #ffffff;
+        }
+        .comTable table th{
+            padding: 4.6px;
+        }.comTable table  button{
+             border: none;
+             border-radius: 3px;
+         }
+        .comTable table button:hover{
+            background-color:#00315C;
+            color: #ffffff;
+        }
+    </style>
+    <script th:src="@{/js/jquery.min.js}" src="../static/js/jquery.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/compare.js}" src="../static/js/compare.js"></script>
+    <script th:src="@{/js/jquery.cookie.js}" src="../static/js/jquery.cookie.js"></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" href="../static/css/bootstrap.css">
+</head>
+<body>
+<div th:insert="layout/head :: head"></div>
+<div class="container-fluid" style="margin-top: 10px">
+    <div class="row">
+        <!--<div class="col-md-2"  th:each="xuexiao,status:${xuexiaos}" th:if="${status.count}<=3">-->
+        <div class="col-md-2"  th:each="xuexiao,status:${xuexiaos}" >
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-info" ><label>招生代码：</label><span th:text="${xuexiao.zhaoshengdaima}"></span></li>
+                <li class="list-group-item list-group-item-info" style="height: 70px"><label>学校名称：</label><span th:text="${xuexiao.xuexiaomingcheng}"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" th:data="${xuexiao.id}+'-'+${xuexiao.xuexiaomingcheng}"class="xuexiaodel">删除</a></li>
+                <li class="list-group-item list-group-item-info" style="height: 70px" ><label>级别：</label><span th:text="${xuexiao.jibie}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>地区：</label><span th:text="${xuexiao.diqu}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>城市：</label><span th:text="${xuexiao.chengshi}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>办学性质：</label><span th:text="${xuexiao.banxuexingzhi}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>预测分2018：</label><span th:text="${xuexiao.yucefenshu2018}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>预测位次2018：</label><span th:text="${xuexiao.yuceweici2018}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>文理：</label><span th:text="${xuexiao.wenli}"></span></li>
+                <li class="list-group-item list-group-item-info" ><label>批次：</label><span th:text="${xuexiao.pici}"></span></li>
+                <li class="list-group-item list-group-item-info" style="height: 100px" >
+                    <label>专业：</label>
+                    <select>
+                        <option th:each="zhuanye:${xuexiao.zhuanye}" th:text="${zhuanye.zhuanyemingcheng}" th:id="${zhuanye.id}"></option>
+                    </select>
+                    <input class="btn btn-sm zhuanyebtn" type="button" value="查询" >
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-md-2"  th:each="xuexiao,status:${xuexiaos}" th:if="${status.count}>3">-->
+            <!--<ul class="list-group">-->
+                <!--<li class="list-group-item list-group-item-info" ><label>招生代码：</label><span th:text="${xuexiao.zhaoshengdaima}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>学校名称：</label><span th:text="${xuexiao.xuexiaomingcheng}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>级别：</label><span th:text="${xuexiao.jibie}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>地区：</label><span th:text="${xuexiao.diqu}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>城市：</label><span th:text="${xuexiao.chengshi}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>办学性质：</label><span th:text="${xuexiao.banxuexingzhi}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>预测分2018：</label><span th:text="${xuexiao.yucefenshu2018}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>预测位次2018：</label><span th:text="${xuexiao.yuceweici2018}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>文理：</label><span th:text="${xuexiao.wenli}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info" ><label>批次：</label><span th:text="${xuexiao.pici}"></span></li>-->
+                <!--<li class="list-group-item list-group-item-info">-->
+                    <!--<label>专业：</label>-->
+                    <!--<select>-->
+                        <!--<option th:each="zhuanye:${xuexiao.zhuanye}" th:text="${zhuanye.zhuanyemingcheng}" th:id="${zhuanye.id}"></option>-->
+                    <!--</select>-->
+                    <!--<input class="btn btn-sm zhuanyebtn" type="button" value="查询" >-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+
+</body>
+<script>
+    $(".zhuanyebtn").click(function () {
+        var p = $(this).parent().parent();
+        p.children(".added").remove();
+        var id = $(this).prev().find("option:selected").attr("id");
+        $.ajax({
+            type: "post",
+            url: "/com/zhuanye",
+            data: {
+                id: id
+            },
+            success: function (data) {
+                console.log(data)
+                p.append('<li class="list-group-item list-group-item-info added" ><label>硕博点：</label><span>'+data.shuobodian +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>学科重点：</label><span>'+data.xuekezhongdian +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>分数2014：</label><span>'+data.fenshu2014 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>分数2015：</label><span>'+data.fenshu2015 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>分数2016：</label><span>'+data.fenshu2016 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>分数2017：</label><span>'+data.fenshu2017 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>位次2014：</label><span>'+data.weici2014 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>位次2015：</label><span>'+data.weici2015 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>位次2016：</label><span>'+data.weici2016 +'</span></li>');
+                p.append('<li class="list-group-item list-group-item-info added" ><label>预测位次2018：</label><span>'+data.yuceweici2018 +'</span></li>');
+            },
+            error: function () {
+                alert("查询失败，请重新再试~")
+            }
+        })
+    })
+   $(function () {
+       $(".xuexiaodel").click(function () {
+           var id = $(this).attr("data");
+           var loclarr = $.cookie('schoolName').split(',');
+           $(this).parent().parent().remove();
+           removeLocal(loclarr, id);
+           refalsh();
+       })
+   })
+</script>
+</html>
